@@ -515,7 +515,7 @@
       </div>
     </nav>
 
-    <div class="nav-note"><b>Cliente:</b> ING. BYRON VIVANCO · <b>Fuente de datos:</b> Google Sheets — hojas por propiedad. Vea la nota sobre actualización arriba de la tabla.</div>
+    <div class="nav-note"><b>Cliente:</b> IMPALA TERMINALS · <b>Fuente de datos:</b> Google Sheets — hojas por propiedad. Vea la nota sobre actualización arriba de la tabla.</div>
 
     <div class="theme-switch">
       <div class="user-chip-label">
@@ -533,13 +533,13 @@
   <div class="main">
     <div class="topbar">
       <div>
-        <h1>Panel de Monitoreo — ING. BYRON VIVANCO</h1>
+        <h1>Panel de Monitoreo — IMPALA TERMINALS</h1>
         <p class="sub">Monitoreo de camaroneras y propiedades</p>
       </div>
       <div class="topbar-right">
         <div class="pill" style="font-weight:700;letter-spacing:.4px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-8h6v8"/></svg>
-          Cliente: ING. BYRON VIVANCO
+          Cliente: IMPALA TERMINALS
         </div>
         <div class="pill">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
@@ -565,7 +565,7 @@
 
       <div class="source-line">
         <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-        Datos en vivo desde Google Sheets (hojas por propiedad de ING. BYRON VIVANCO) · se actualiza automáticamente cada 3 minutos · <a href="javascript:void(0)" id="btnRefreshNow">actualizar ahora</a>
+        Datos en vivo desde Google Sheets (hojas por propiedad de IMPALA TERMINALS) · se actualiza automáticamente cada 3 minutos · <a href="javascript:void(0)" id="btnRefreshNow">actualizar ahora</a>
       </div>
 
       <div class="filters">
@@ -578,7 +578,7 @@
           <select id="fEst"></select>
         </div>
         <div class="field">
-          <label for="fProp">Camaronera / Propiedad</label>
+          <label for="fProp">Área</label>
           <select id="fProp"></select>
         </div>
         <div class="field">
@@ -683,7 +683,7 @@
           <select id="rEst"></select>
         </div>
         <div class="field">
-          <label for="rProp">Camaronera / Propiedad</label>
+          <label for="rProp">Área</label>
           <select id="rProp"></select>
         </div>
         <div class="field">
@@ -832,7 +832,7 @@
 ;
 
   var CLIENTE_MAP = {
-    "IMPALA":"ING. BYRON VIVANCO"
+    "IMPALA":"IMPALA TERMINALS"
   };
   function clienteDe(prop){
     if (!prop) return "Sin cliente";
@@ -889,7 +889,7 @@
   // Impala (planta industrial) distingue Security (ASESE/CSESE) de Safety
   // (ASESA/CSESA), cada una con su propia leyenda de 2026.
   var NT_LABELS_OVERRIDE = {
-    "IMPALA": {
+    "ING. BYRON VIVANCO": {
       ASESE: {
         1:"SUSTRACCIÓN DE PRODUCTOS O MATERIALES",
         2:"ENCONTRAR ELEMENTOS O PAQUETES SOSPECHOSOS EN CUALQUIER ÁREA/ZONA",
@@ -1069,7 +1069,7 @@
     DATA = RAW.map(function(r){
       return {
         n: r.n, estacion: r.estacion, fecha: r.dia, hora: r.hora,
-        prop: r.camaronera, cliente: clienteDe(r.camaronera), perim: r.perimetro, nt: r.nt, tipo: r.tipo,
+        prop: r.camaronera, cliente: "IMPALA TERMINALS", perim: r.perimetro, nt: r.nt, tipo: r.tipo,
         desc: r.descripcion, inv: r.involucrado, nivel: r.nivel,
         op: r.operador, accion: r.accion
       };
@@ -1147,7 +1147,7 @@
   var ALWAYS_SHOW_TIPOS = ["ASESE", "CSESE", "ASESA", "CSESA"];
   // El cliente fijo del panel debe verse en el filtro aunque, como aqui, las
   // propiedades todavia no tengan ningun incidente cargado.
-  var ALWAYS_SHOW_CLIENTES = ["ING. BYRON VIVANCO"];
+  var ALWAYS_SHOW_CLIENTES = ["IMPALA TERMINALS"];
   // Niveles de riesgo del esquema oficial (ALTO/MEDIO/BAJO), visibles siempre
   // aunque aun no existan registros para alguno de ellos.
   var ALWAYS_SHOW_NIVELES = ["Bajo", "Medio", "Alto"];
@@ -1545,7 +1545,7 @@
     renderStdTrend(els.stdTrendPanel, rows);
     var novedadCounts = {};
     rows.forEach(function(d){
-      var label = novedadLabel(d.tipo, d.nt, d.prop) || (d.tipo && d.tipo !== "Sin clasificar" ? d.tipo : "Otros");
+      var label = novedadLabel(d.tipo, d.nt, d.estacion) || (d.tipo && d.tipo !== "Sin clasificar" ? d.tipo : "Otros");
       novedadCounts[label] = (novedadCounts[label]||0) + 1;
     });
     renderRankList(els.novedadPanel, novedadCounts, 10, {});
